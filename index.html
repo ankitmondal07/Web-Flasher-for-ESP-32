@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Web Flasher | AM Dynamics</title>
+
+<meta name="description" content="Flash ESP32 firmware directly from your browser using ESP Web Tools.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+font-family:Inter,sans-serif;
+
+background:#0f172a;
+
+color:white;
+
+line-height:1.6;
+
+}
+
+.container{
+
+max-width:1100px;
+
+margin:auto;
+
+padding:40px 20px;
+
+}
+
+.hero{
+
+text-align:center;
+
+padding:70px 20px;
+
+}
+
+.hero h1{
+
+font-size:42px;
+
+font-weight:700;
+
+margin-bottom:15px;
+
+}
+
+.hero p{
+
+font-size:18px;
+
+color:#cbd5e1;
+
+}
+
+.card{
+
+background:#1e293b;
+
+border-radius:18px;
+
+padding:30px;
+
+margin-top:30px;
+
+box-shadow:0 8px 25px rgba(0,0,0,.25);
+
+}
+
+h2{
+
+margin-bottom:15px;
+
+font-size:26px;
+
+}
+
+ul{
+
+padding-left:20px;
+
+}
+
+li{
+
+margin:8px 0;
+
+}
+
+.center{
+
+text-align:center;
+
+}
+
+.button{
+
+display:inline-block;
+
+padding:14px 28px;
+
+background:linear-gradient(135deg,#2563eb,#06b6d4);
+
+color:white;
+
+text-decoration:none;
+
+border-radius:12px;
+
+font-weight:600;
+
+transition:.25s;
+
+}
+
+.button:hover{
+
+transform:translateY(-2px);
+
+box-shadow:0 8px 18px rgba(37,99,235,.35);
+
+}
+
+.install{
+
+margin-top:25px;
+
+display:flex;
+
+justify-content:center;
+
+}
+
+/* Style the REAL ESP Web Tools button */
+
+esp-web-install-button::part(button){
+
+background:linear-gradient(135deg,#2563eb,#06b6d4);
+
+border:none;
+
+border-radius:12px;
+
+padding:15px 32px;
+
+font-size:17px;
+
+font-weight:600;
+
+color:white;
+
+cursor:pointer;
+
+box-shadow:0 10px 24px rgba(37,99,235,.35);
+
+transition:.25s;
+
+}
+
+esp-web-install-button::part(button):hover{
+
+transform:translateY(-2px);
+
+}
+
+.warning{
+
+background:#7c2d12;
+
+padding:18px;
+
+border-radius:12px;
+
+margin-top:20px;
+
+}
+
+footer{
+
+margin-top:60px;
+
+text-align:center;
+
+color:#94a3b8;
+
+font-size:14px;
+
+padding-bottom:40px;
+
+}
+
+@media(max-width:700px){
+
+.hero h1{
+
+font-size:32px;
+
+}
+
+.hero p{
+
+font-size:16px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<section class="hero">
+
+<h1>Web Flasher</h1>
+
+<p>Flash your ESP32 firmware directly from Chrome or Edge.</p>
+
+<p>No Arduino IDE. No drivers configuration inside software.</p>
+
+</section>
+
+<div class="card">
+
+<h2>Flash Firmware</h2>
+
+<p>
+
+Click the button below to install firmware.
+
+</p>
+
+<div class="install">
+
+<esp-web-install-button manifest="manifest.json">
+</esp-web-install-button>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Supported Board</h2>
+
+<ul>
+
+<li>ESP32 Dev Module</li>
+
+<li>Chip Family: ESP32</li>
+
+<li>USB Connection Required</li>
+
+<li>Chrome / Edge Browser</li>
+
+</ul>
+
+</div>
+
+<div class="card">
+
+<h2>Installation Steps</h2>
+
+<ol>
+
+<li>Connect ESP32 using USB cable.</li>
+
+<li>Open this page in Google Chrome or Microsoft Edge.</li>
+
+<li>Click <strong>Flash Firmware</strong>.</li>
+
+<li>Select your serial port.</li>
+
+<li>Wait until flashing completes.</li>
+
+<li>Your ESP32 will reboot automatically.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Tutorial</h2>
+
+<p>
+
+Watch the complete installation tutorial.
+
+</p>
+
+<br>
+
+<a class="button" href="https://youtube.com" target="_blank">
+
+Watch Tutorial
+
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>Troubleshooting</h2>
+
+<ul>
+
+<li>Use a data USB cable (not charge-only).</li>
+
+<li>Close Arduino IDE before flashing.</li>
+
+<li>Install CP210x or CH340 USB drivers if the board is not detected.</li>
+
+<li>Try another USB port.</li>
+
+<li>If connection fails, hold the BOOT button while clicking Install.</li>
+
+<li>Refresh the page and reconnect if the serial port disappears.</li>
+
+</ul>
+
+<div class="warning">
+
+<strong>Important:</strong>
+
+Do not disconnect the ESP32 while firmware is being written.
+
+</div>
+
+</div>
+
+<footer>
+
+© 2026 AM Dynamics
+
+<br>
+
+Powered by ESP Web Tools
+
+</footer>
+
+</div>
+
+</body>
+</html>
