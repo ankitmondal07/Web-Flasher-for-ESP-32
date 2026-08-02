@@ -723,16 +723,20 @@ function initCreatorMode() {
       statusMsg.innerHTML = '<span style="color: var(--accent-cyan);">Detecting and fetching compiled .bin files from disk...</span>';
 
       try {
+        // Prevent calling the local API if hosted on GitHub Pages or other remote servers
+        if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+          throw new Error('The Auto-Detect feature only works when running the local Python server (localhost). On GitHub Pages, please use the manual drag-and-drop area below.');
+        }
+
         const response = await fetch('/api/auto-package', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ command: rawCmd })
         });
 
-        // Check if the response is JSON (GitHub Pages returns HTML/405 for POST requests)
         const contentType = response.headers.get("content-type");
         if (!response.ok || !contentType || !contentType.includes("application/json")) {
-          throw new Error('Local server not found. The "Auto-Detect" feature only works if you run `python package_firmware.py --server` on your PC. On GitHub Pages, please use the manual drag-and-drop area below');
+          throw new Error('Local server not responding correctly. Ensure `python package_firmware.py --server` is running.');
         }
 
         const resData = await response.json();
@@ -752,7 +756,7 @@ function initCreatorMode() {
         }
       } catch (err) {
         console.warn(err);
-        statusMsg.innerHTML = `<span style="color: var(--accent-amber);"><i class="fas fa-info-circle"></i> ${err.message}. You can also use the manual uploader below or run <code>python package_firmware.py</code> in terminal!</span>`;
+        statusMsg.innerHTML = `<span style="color: var(--accent-amber);"><i class="fas fa-exclamation-triangle"></i> ${err.message}</span>`;
       } finally {
         btnAutoFetch.disabled = false;
         btnAutoFetch.innerHTML = '<i class="fas fa-magic"></i> Auto-Detect Local .BIN Files & Create ZIP';
