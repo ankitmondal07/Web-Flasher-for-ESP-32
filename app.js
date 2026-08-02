@@ -729,9 +729,15 @@ function initCreatorMode() {
           body: JSON.stringify({ command: rawCmd })
         });
 
+        // Check if the response is JSON (GitHub Pages returns HTML/405 for POST requests)
+        const contentType = response.headers.get("content-type");
+        if (!response.ok || !contentType || !contentType.includes("application/json")) {
+          throw new Error('Local server not found. The "Auto-Detect" feature only works if you run `python package_firmware.py --server` on your PC. On GitHub Pages, please use the manual drag-and-drop area below');
+        }
+
         const resData = await response.json();
 
-        if (response.ok && resData.success) {
+        if (resData.success) {
           statusMsg.innerHTML = `<span style="color: var(--accent-emerald); font-weight: 600;"><i class="fas fa-check-circle"></i> Success! Local .bin files detected on disk and packaged into <code>${resData.zip_url}</code>!</span>`;
           
           // Trigger immediate download of generated ZIP
@@ -742,7 +748,7 @@ function initCreatorMode() {
           a.click();
           document.body.removeChild(a);
         } else {
-          throw new Error(resData.message || 'Local API endpoint not available. Please run "python package_firmware.py" in terminal.');
+          throw new Error(resData.message || 'Error processing request.');
         }
       } catch (err) {
         console.warn(err);
