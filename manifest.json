@@ -1,29 +1,26 @@
 {
-  "name": "Web Flasher",
+  "name": "ESP32 Web Flasher",
   "version": "1.0.0",
-  "home_assistant_domain": "",
   "new_install_prompt_erase": true,
-
   "builds": [
     {
       "chipFamily": "ESP32",
-
       "parts": [
         {
-          "path": "firmware/web_flash.ino.bootloader.bin",
-          "offset": "0x1000"
+          "path": "firmware/web_flash.ino.ino.bootloader.bin",
+          "offset": 4096
         },
         {
-          "path": "firmware/web_flash.ino.partitions.bin",
-          "offset": "0x8000"
+          "path": "firmware/web_flash.ino.ino.partitions.bin",
+          "offset": 32768
         },
         {
           "path": "firmware/boot_app0.bin",
-          "offset": "0xe000"
+          "offset": 57344
         },
         {
-          "path": "firmware/web_flash.ino.bin",
-          "offset": "0x10000"
+          "path": "firmware/web_flash.ino.ino.bin",
+          "offset": 65536
         }
       ]
     }
